@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Albiimmobilier/static/css/main.7eb41528.css",
+    "main.js": "/Albiimmobilier/static/js/main.8f4e3be3.js",
+    "static/media/albi.jpg": "/Albiimmobilier/static/media/albi.30b42bc9da5e688e553e.jpg",
+    "index.html": "/Albiimmobilier/index.html",
+    "main.7eb41528.css.map": "/Albiimmobilier/static/css/main.7eb41528.css.map",
+    "main.8f4e3be3.js.map": "/Albiimmobilier/static/js/main.8f4e3be3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7eb41528.css",
+    "static/js/main.8f4e3be3.js"
+  ]
+}
