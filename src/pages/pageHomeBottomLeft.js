@@ -1,9 +1,7 @@
 import {styles} from '../components/ComponentCss';
 import {useState,useRef,useEffect} from "react";
 import { loadExcelDataCotsList } from '../components/ReadExcelFileData/ExcelLoaderCotsList';
-import { FaEdit } from "react-icons/fa"; // Icône "Edit" de FontAwesome
-import { useNavigate } from "react-router-dom";
-
+import { fLoadSupabaseAnnonces } from '../components/ReadSupabase/loadSupabaseDatas';
 
 function DivPageHomeBottomLeft() {
 
@@ -44,7 +42,7 @@ function DivPageHomeBottomLeft() {
   const handleSelectAnnonceurChange = (event) => setDraftAnnonceur(event.target.value);
 
   // Validation au clic
-  const handleUpdateClick = () => {
+  const handleFilterClick = () => {
     setSelectedType(draftType);
     setSelectedChauffage(draftChauffage);
     setSelectedPieces(draftPieces);
@@ -52,6 +50,23 @@ function DivPageHomeBottomLeft() {
     setSelectedPrix(draftPrix);
     setSelectedAnnonceur(draftAnnonceur);
   };
+
+  //---------
+
+  const [AnnoncesDataLoad, SetAnnoncesDataLoad] = useState([]);  
+
+
+  // TRAITEMENT DEMARRAGE
+  useEffect(() => {
+    const fetchData = async () => {
+      var copyData = [...await fLoadSupabaseAnnonces()];
+      SetAnnoncesDataLoad(copyData);
+    }
+      fetchData();
+  }, [])
+
+  alert(AnnoncesDataLoad)
+
 
   
   //******************* 
@@ -147,7 +162,7 @@ function DivPageHomeBottomLeft() {
 
             <tr style={styles.trTableRecherche}>
               <td style={{columnSpan:"2"}}>
-                <button style={{marginTop:"10px",...styles.btnOk}} onClick={handleUpdateClick}>Rechercher</button>
+                <button style={{marginTop:"10px",...styles.btnOk}} onClick={handleFilterClick}>Filtrer</button>
               </td>
             </tr>
 
