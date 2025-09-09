@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {styles} from './ComponentCss';
 import "./Navbar.css";
 import DivPageHomeBottomLeft from "../pages/pageHomeBottomLeft";
+import DivPageHomeBottomCenter from "../pages/pageHomeBottomCenter";
 import { Link } from "react-router-dom";
 
 //--------------------------
@@ -66,7 +67,7 @@ const fCurrentTime = () => {
         </div>
 
         <div style={styles.divHomeBasCentre}>
-          Div Bas center
+          <DivPageHomeBottomCenter/>
         </div>
 
         <div style={styles.divHomeBasDroite}>

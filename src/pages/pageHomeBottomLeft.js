@@ -1,7 +1,5 @@
 import {styles} from '../components/ComponentCss';
-import {useState,useRef,useEffect} from "react";
-import { loadExcelDataCotsList } from '../components/ReadExcelFileData/ExcelLoaderCotsList';
-import { fLoadSupabaseAnnonces } from '../components/ReadSupabase/loadSupabaseDatas';
+import {useState} from "react";
 
 function DivPageHomeBottomLeft() {
 
@@ -50,23 +48,6 @@ function DivPageHomeBottomLeft() {
     setSelectedPrix(draftPrix);
     setSelectedAnnonceur(draftAnnonceur);
   };
-
-  //---------
-
-  const [AnnoncesDataLoad, SetAnnoncesDataLoad] = useState([]);  
-
-
-  // TRAITEMENT DEMARRAGE
-  useEffect(() => {
-    const fetchData = async () => {
-      var copyData = [...await fLoadSupabaseAnnonces()];
-      SetAnnoncesDataLoad(copyData);
-    }
-      fetchData();
-  }, [])
-
-  alert(AnnoncesDataLoad)
-
 
   
   //******************* 
