@@ -3,6 +3,8 @@ import {styles} from './ComponentCss';
 import "./Navbar.css";
 import DivPageHomeBottomLeft from "../pages/pageHomeBottomLeft";
 import DivPageHomeBottomCenter from "../pages/pageHomeBottomCenter";
+import DivPageHomeBottomRight from "../pages/pageHomeBottomRight";
+
 import { Link } from "react-router-dom";
 
 //--------------------------
@@ -22,8 +24,18 @@ const fCurrentTime = () => {
 //---------------------------
 
   class PageBaseComponent extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+      selectedText: [], // 👉 on stocke ici le texte cliqué
+    };
+  }
 
-      render () {
+  handleTextClick  = (row) => {
+    this.setState({ selectedText: row }); // 👉 met à jour l’état
+  };
+
+      render () {   
   
   return (
 
@@ -67,11 +79,11 @@ const fCurrentTime = () => {
         </div>
 
         <div style={styles.divHomeBasCentre}>
-          <DivPageHomeBottomCenter/>
+          <DivPageHomeBottomCenter onTextClick={this.handleTextClick}/>
         </div>
 
-        <div style={styles.divHomeBasDroite}>
-          Div Bas droite
+        <div style={styles.divHomeBasRight}  >
+          <DivPageHomeBottomRight text={this.state.selectedText}/>
         </div>
 
       </div>

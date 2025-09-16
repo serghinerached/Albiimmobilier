@@ -36,7 +36,7 @@ export const styles = {
     border: "2px solid black"
   },
 
-  divHomeBasDroite: {
+  divHomeBasRight: {
     flex: "0 0 50%",
     color: "white",
     padding: "20px",

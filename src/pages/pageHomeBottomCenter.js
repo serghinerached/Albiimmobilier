@@ -1,11 +1,9 @@
 import {styles} from '../components/ComponentCss';
 import {useState,useEffect} from "react";
-import fDataTableAnnonce from '../components/ReadSupabase/loadSupabaseDatas';
 import { supabase } from '../components/ReadSupabase/supabaseClient';
-import photo from '../photos/1-1.png'; // chemin depuis src
 
 
-function DivPageHomeBottomCenter() {
+function DivPageHomeBottomCenter({ onTextClick }) {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -24,29 +22,46 @@ function DivPageHomeBottomCenter() {
     fetchData();
   }, []);
 
+  // pour photos dynamiques
+  const images = require.context("../photos", false, /\.(png|jpe?g|svg)$/);
+  const getImage = (id) => {
+    const filename = `${id}-1.png`;
+    return images.keys().includes(`./${filename}`)
+      ? images(`./${filename}`)
+      : images("./default.png"); // fallback
+  };
+
   //-----------------------------------
 
   return (
           rows.map((row) => (
-            <table style={{border:"2px solid black",marginBottom:"20px",fill:"black",width:"90%"}} >
-              <tr style={{color:"white",backgroundColor:"Steelblue"}}>
-                <td style={{padding:"5px"}}>{row.type}</td>
-                <td colSpan={4} align='right' style={{paddingRight:"10px"}}>{`${row.prix} €`}</td>
+            <table style={{border:"2px solid black",marginBottom:"20px",fill:"black",width:"80%"}} >
+              <tr style={{color:"white",backgroundColor:"#D2691E"}}>
+                <td style={{padding:"5px",width:"37%"}}>{row.type}</td>
+                <td colSpan={3} align='right' style={{paddingRight:"10px"}}>{`${row.prix} €`}</td>
               </tr>
-              <tr style={{color:"black",backgroundColor:"LightSteelblue"}}>
-                <td style={{padding:"5px"}}>
-                  Paru le {new Date(row.created).toLocaleDateString()}
-                 
+              <tr style={{color:"black"}}>
+                <td style={{padding:"5px",textAlign:"left",backgroundColor:"	#FFDEAD"}}>
+                  Paru le {new Date(row.created).toLocaleDateString()} <br></br>
+                  {row.superficie} m2 <br></br>
+                  {row.pieces} pièces  <br></br>
+                  <img
+                    src={getImage("x")}
+                    alt="icone"
+                    style={{ width: "70px", height: "15px",cursor: "pointer"  }}
+                    onClick={() => onTextClick(["a","b"])}
+                  /> 
+                </td>
+             
+                <td style={{
+                  backgroundImage: `url(${getImage(row.id)})`,
+                  backgroundSize: "cover",      // ou "contain" selon l'effet voulu
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center", 
+                  width: "100px",               // largeur de la cellule
+                  height: "100px"}}>
                 </td>
                 
-                <td style={{
-    backgroundImage: `url(${photo})`,
-    backgroundSize: "cover",      // ou "contain" selon l'effet voulu
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center", width: "200px",               // largeur de la cellule
-    height: "100px"}}>
-                  
-                </td>
               </tr>
               
              
