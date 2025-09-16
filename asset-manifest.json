@@ -1,15 +1,25 @@
 {
   "files": {
     "main.css": "/Albiimmobilier/static/css/main.7eb41528.css",
-    "main.js": "/Albiimmobilier/static/js/main.6264d38b.js",
+    "main.js": "/Albiimmobilier/static/js/main.dd34d5ed.js",
     "static/media/albi.jpg": "/Albiimmobilier/static/media/albi.30b42bc9da5e688e553e.jpg",
+    "static/media/2-2.png": "/Albiimmobilier/static/media/2-2.81a60296486e17a798a4.png",
+    "static/media/2-4.png": "/Albiimmobilier/static/media/2-4.e41bfff91bfd8de185c0.png",
+    "static/media/2-5.png": "/Albiimmobilier/static/media/2-5.b90c76c99398e574e1f9.png",
+    "static/media/2-3.png": "/Albiimmobilier/static/media/2-3.aaf45079e167d5826ed7.png",
     "static/media/1-1.png": "/Albiimmobilier/static/media/1-1.63fd9726049397cff084.png",
+    "static/media/4-1.png": "/Albiimmobilier/static/media/4-1.e4d89902119d1af6a4af.png",
+    "static/media/6-1.png": "/Albiimmobilier/static/media/6-1.6b4adf28c273ae3b59bf.png",
+    "static/media/2-1.png": "/Albiimmobilier/static/media/2-1.869136d1b5a59b8a6cab.png",
+    "static/media/3-1.png": "/Albiimmobilier/static/media/3-1.dd972cb5a5bf582c5077.png",
+    "static/media/5-1.png": "/Albiimmobilier/static/media/5-1.156b5279a2c0b47c3047.png",
+    "static/media/x-1.png": "/Albiimmobilier/static/media/x-1.f9bceb9cf2f40787f2a1.png",
     "index.html": "/Albiimmobilier/index.html",
     "main.7eb41528.css.map": "/Albiimmobilier/static/css/main.7eb41528.css.map",
-    "main.6264d38b.js.map": "/Albiimmobilier/static/js/main.6264d38b.js.map"
+    "main.dd34d5ed.js.map": "/Albiimmobilier/static/js/main.dd34d5ed.js.map"
   },
   "entrypoints": [
     "static/css/main.7eb41528.css",
-    "static/js/main.6264d38b.js"
+    "static/js/main.dd34d5ed.js"
   ]
 }
