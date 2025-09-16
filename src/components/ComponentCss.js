@@ -4,44 +4,48 @@ import albi from '../photos/albi.jpg'; // chemin depuis src
 export const styles = {
 
   divHomeGeneral:{
-    display: "flex",
-    flexDirection: "column",
-    height: "99vh",
+    height: "100vh",
     width: "99vw",
     border: "2px solid red",
     backgroundImage: `url(${albi})`,
     backgroundSize: "cover",   // couvre toute la div
     backgroundPosition: "top", // centre l'image
-    backgroundRepeat: "no-repeat" // pas de répétition
+    backgroundRepeat: "no-repeat",// pas de répétition
+    overflow: "hidden",  
   },
 
   divHomeHaut: {
     padding: "10px",
-    border: "2px solid black",
+    border: "1px solid black",
   },
 
   divHomeBottomLeft: {
-    flex: "0 0 20%",
+    flex: "1 10%",
     color: "white",
     padding: "20px",
     textAlign: "center",
-    border: "2px solid black"
+    overflow: "hidden"
   },
 
   divHomeBasCentre: {
-    flex: "0 0 30%",
     color: "white",
-    padding: "20px",
+    paddingLeft: "20px",
+    paddingBottom:"10px",
+    paddingTop:"10px",
     textAlign: "center",
-    border: "2px solid black"
+    paddingTop: "20px",
+    flex: "2 20%",
+    display:"flex", 
+    flexDirection: "column",
+    minHeight: 0, 
   },
 
   divHomeBasRight: {
-    flex: "0 0 50%",
+    flex: "1 50%",
     color: "white",
     padding: "20px",
     textAlign: "center",
-    border: "2px solid black"
+    overflow: "hidden" 
   },
 
   trTableRecherche: {

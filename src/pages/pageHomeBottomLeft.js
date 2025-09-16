@@ -33,11 +33,6 @@ function DivPageHomeBottomLeft() {
   const tabLibPrix = ["50 000", "100 000","150 000","200 000","250 000","300 000","+300 000"];
   const handleSelectPrixChange = (event) => setDraftPrix(event.target.value);
 
-   // Annonceur
-  const [draftAnnonceur, setDraftAnnonceur] = useState("");
-  const [selectedAnnonceur, setSelectedAnnonceur] = useState("");
-  const tabLibAnnonceur = ["Particulier", "Professionel"];
-  const handleSelectAnnonceurChange = (event) => setDraftAnnonceur(event.target.value);
 
   // Validation au clic
   const handleFilterClick = () => {
@@ -46,7 +41,6 @@ function DivPageHomeBottomLeft() {
     setSelectedPieces(draftPieces);
     setSelectedSuperficie(draftSuperficie);
     setSelectedPrix(draftPrix);
-    setSelectedAnnonceur(draftAnnonceur);
   };
 
   
@@ -121,20 +115,6 @@ function DivPageHomeBottomLeft() {
                   {tabLibPrix.map((libPrix, index) => (
                     <option key={index} value={libPrix}>
                       {libPrix}
-                    </option>
-                  ))}
-                </select>
-              </td>
-            </tr>
-
-            <tr style={styles.trTableRecherche}>
-              <td>Annonceur</td>
-              <td>
-                <select value={draftSuperficie} onChange={handleSelectAnnonceurChange}>
-                  <option value="Tous">Tous</option>
-                  {tabLibAnnonceur.map((libAnnonceur, index) => (
-                    <option key={index} value={libAnnonceur}>
-                      {libAnnonceur}
                     </option>
                   ))}
                 </select>

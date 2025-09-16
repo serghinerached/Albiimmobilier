@@ -10,7 +10,7 @@ function DivPageHomeBottomCenter({ onTextClick }) {
     const fetchData = async () => {
       let { data, error } = await supabase
         .from("Annonce") // remplace par le nom de ta table Supabase
-        .select("id, created, type,chauffage,pieces,superficie,prix");
+        .select("*");
 
       if (error) {
         console.error("Erreur :", error);
@@ -49,7 +49,8 @@ function DivPageHomeBottomCenter({ onTextClick }) {
                     src={getImage("x")}
                     alt="icone"
                     style={{ width: "70px", height: "15px",cursor: "pointer"  }}
-                    onClick={() => onTextClick(["a","b"])}
+                    onClick={() => onTextClick(row)} // ok
+
                   /> 
                 </td>
              

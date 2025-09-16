@@ -25,15 +25,15 @@ const fCurrentTime = () => {
 
   class PageBaseComponent extends React.Component {
     constructor(props) {
-    super(props);
-    this.state = {
-      selectedText: [], // 👉 on stocke ici le texte cliqué
-    };
-  }
+      super(props);
+      this.state = {
+        selectedText: null, // 👉 on stocke ici le texte cliqué
+      };
+    }
 
-  handleTextClick  = (row) => {
-    this.setState({ selectedText: row }); // 👉 met à jour l’état
-  };
+    handleTextClick  = (row) => {
+      this.setState({ selectedText: row}); // 👉 met à jour l’état
+    };
 
       render () {   
   
@@ -43,10 +43,8 @@ const fCurrentTime = () => {
 
       <div style={styles.divHomeHaut}>  
 
-        <div style={{display: "flex", flex: 1
-
-        }}>
-          <h1 style={{marginLeft:"700px",flex:1,color:"black", fontWeight:"bold"}}>ALBIIMMOBILIER (React)</h1>
+        <div style={{display: "flex", flex: 1 }}>
+          <h1 style={{marginLeft:"700px",flex:1,color:"black", fontWeight:"bold"}}>ALBIIMMOBILIER</h1>
 
           <h3 style={{flex:1,textAlign:"right", color: "black", fontWeight:"bold"}}>{fToday()}  {fCurrentTime()}</h3>
         </div>
@@ -72,18 +70,18 @@ const fCurrentTime = () => {
 
       </div>
 
-      <div style={{display: "flex", flex: 1}}>
+      <div style={{display: "flex", height: "calc(100vh - 100px)" }}>
 
         <div style={styles.divHomeBottomLeft}>
           <DivPageHomeBottomLeft/>
         </div>
 
-        <div style={styles.divHomeBasCentre}>
+        <div style={{ flex: 1, overflowY: "auto", minHeight: 0,...styles.divHomeBasCentre}}>
           <DivPageHomeBottomCenter onTextClick={this.handleTextClick}/>
         </div>
 
-        <div style={styles.divHomeBasRight}  >
-          <DivPageHomeBottomRight text={this.state.selectedText}/>
+        <div style={styles.divHomeBasRight} >
+          <DivPageHomeBottomRight row={this.state.selectedText}/>
         </div>
 
       </div>
