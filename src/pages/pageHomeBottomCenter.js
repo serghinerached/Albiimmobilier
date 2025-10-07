@@ -41,7 +41,7 @@ function DivPageHomeBottomCenter({ onTextClick }) {
                 <td colSpan={3} align='right' style={{paddingRight:"10px"}}>{`${row.prix} €`}</td>
               </tr>
               <tr style={{color:"black"}}>
-                <td style={{padding:"5px",textAlign:"left",backgroundColor:"	#FFDEAD"}}>
+                <td style={{padding:"5px",textAlign:"left",backgroundColor:"lightgray"}}>
                   Paru le {new Date(row.created).toLocaleDateString()} <br></br>
                   {row.superficie} m2 <br></br>
                   {row.pieces} pièces  <br></br>
