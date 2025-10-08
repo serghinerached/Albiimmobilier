@@ -23,74 +23,80 @@ const fCurrentTime = () => {
 
 //---------------------------
 
-  class PageBaseComponent extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        selectedText: null, // 👉 on stocke ici le texte cliqué
-      };
-    }
-
-    handleTextClick  = (row) => {
-      this.setState({ selectedText: row}); // 👉 met à jour l’état
+class PageBaseComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedText: null, // 👉 on stocke ici le texte cliqué
+      selectedTab: []
     };
+  }
 
-      render () {   
+  handleTextClick  = (row) => {
+    this.setState({ selectedText: row}); // 👉 met à jour l’état
+  };
+
+  handleFilterClick = (tabSelect) => {
+    this.setState({ selectedTab: tabSelect}); // 👉 met à jour l’état
+  };
+
+
+  render () {   
   
-  return (
+    return (
 
-    <div style={styles.divHomeGeneral}>  
+      <div style={styles.divHomeGeneral}>  
 
-      <div style={styles.divHomeHaut}>  
+        <div style={styles.divHomeHaut}>  
 
-        <div style={{display: "flex", flex: 1 }}>
-          <h1 style={{marginLeft:"700px",flex:1,color:"black", fontWeight:"bold"}}>ALBIIMMOBILIER</h1>
+          <div style={{display: "flex", flex: 1 }}>
+            <h1 style={{marginLeft:"700px",flex:1,color:"black", fontWeight:"bold"}}>ALBIIMMOBILIER</h1>
 
-          <h3 style={{flex:1,textAlign:"right", color: "black", fontWeight:"bold"}}>{fToday()}  {fCurrentTime()}</h3>
-        </div>
-
-        <nav className="navbar">
-          <div className="navbar-container">
-            <ul className="nav-links" >
-              <li>
-                <Link style={{fontWeight:"bold"}} to="/">Accueil</Link>
-              </li>
-              <li>
-                <Link style={{fontWeight:"bold"}} to="/about">Vendre</Link>
-              </li>
-              <li>
-                <Link style={{fontWeight:"bold"}} to="/services">Mon compte</Link>
-              </li>
-              <li>
-                <Link style={{fontWeight:"bold"}} to="/contact">Contact</Link>
-              </li>
-            </ul>
+            <h3 style={{flex:1,textAlign:"right", color: "black", fontWeight:"bold"}}>{fToday()}  {fCurrentTime()}</h3>
           </div>
-        </nav>
 
+          <nav className="navbar">
+            <div className="navbar-container">
+              <ul className="nav-links" >
+                <li>
+                  <Link style={{fontWeight:"bold"}} to="/">Accueil</Link>
+                </li>
+                <li>
+                  <Link style={{fontWeight:"bold"}} to="/about">Vendre</Link>
+                </li>
+                <li>
+                  <Link style={{fontWeight:"bold"}} to="/services">Mon compte</Link>
+                </li>
+                <li>
+                  <Link style={{fontWeight:"bold"}} to="/contact">Contact</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+        </div>
+
+        <div style={{display: "flex", height: "calc(100vh - 100px)" }}>
+
+          <div style={styles.divHomeBottomLeft}>
+            <DivPageHomeBottomLeft onFilterClick={this.handleFilterClick}/>
+          </div>
+
+          <div style={{ flex: 1, overflowY: "auto", minHeight: 0,...styles.divHomeBasCentre}}>
+            <DivPageHomeBottomCenter onTextClick={this.handleTextClick} tabSelect={this.state.selectedTab}/>
+          </div>
+
+          <div style={styles.divHomeBasRight} >
+            <DivPageHomeBottomRight row={this.state.selectedText}/>
+          </div>
+
+        </div>
+        
       </div>
+    );
+  } // end return
 
-      <div style={{display: "flex", height: "calc(100vh - 100px)" }}>
-
-        <div style={styles.divHomeBottomLeft}>
-          <DivPageHomeBottomLeft/>
-        </div>
-
-        <div style={{ flex: 1, overflowY: "auto", minHeight: 0,...styles.divHomeBasCentre}}>
-          <DivPageHomeBottomCenter onTextClick={this.handleTextClick}/>
-        </div>
-
-        <div style={styles.divHomeBasRight} >
-          <DivPageHomeBottomRight row={this.state.selectedText}/>
-        </div>
-
-      </div>
-      
-    </div>
-  );
-}
-
-}; 
+}; // end
 
 export default PageBaseComponent;
   

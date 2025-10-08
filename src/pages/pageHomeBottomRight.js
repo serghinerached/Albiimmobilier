@@ -4,7 +4,7 @@ import { supabase } from '../components/ReadSupabase/supabaseClient';
 
 
 function DivPageHomeBottomRight({ row }) { 
-  if (!row ) {
+  if (!row || row[0] == "filter") {
     return 
     <div></div>;
   }
