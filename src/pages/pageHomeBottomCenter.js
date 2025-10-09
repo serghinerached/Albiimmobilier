@@ -31,12 +31,15 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
       const { data, error } = await supabase
         .from("Annonce")
         .select("*")
-        .eq("type", tabSelect[1]);
+        .eq("type", tabSelect[1].trim());
 
       if (error) {
         console.error("Erreur Supabase :", error);
         alert("Erreur lors du chargement des annonces");
       } else {
+        data.map((row) => (
+          console.log(row)
+        ))
         setRows(data);
       }
 
