@@ -15,7 +15,7 @@ function DivPageHomeBottomRight({ row }) {
     const filename = `${nameImage}`;
     return images.keys().includes(`./${filename}`)
       ? images(`./${filename}`)
-      : images("./blank.png"); // fallback
+      : images("./grey.png"); // fallback
   };
 
   return (

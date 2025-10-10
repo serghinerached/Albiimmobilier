@@ -41,7 +41,7 @@ export const styles = {
   },
 
   divHomeBasRight: {
-    flex: "1 50%",
+    flex: "1 40%",
     color: "white",
     padding: "20px",
     textAlign: "center",

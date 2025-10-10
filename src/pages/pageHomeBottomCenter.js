@@ -11,7 +11,9 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const { data, error } = await supabase.from("Annonce").select("*");
+      const { data, error } = await supabase
+        .from("Annonce")
+        .select("*");
 
       if (error) {
         console.error("Erreur :", error);
@@ -28,18 +30,51 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
   useEffect(() => {
     const handleFiltrer = async () => {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("Annonce")
-        .select("*")
-        .eq("type", tabSelect[1].trim());
+      console.log("handleFiltrer");
+
+      const type = tabSelect[1];        // ex: "Tous" ou "Maison"
+      const chauffage = tabSelect[2];  
+      const pieces = tabSelect[3];     
+      const superficie = tabSelect[4].split(" ");     
+
+      let query = supabase.from("Annonce").select("*");
+
+      // 🔹 Appliquer le filtre sur le type si différent de "Tous"
+      if (type !== "Tous") {
+        query = query.eq("type", type.trim());
+      }
+
+      // 🔹 Appliquer le filtre sur le chauffage si différent de "Tous"
+      if (chauffage !== "Tous") {
+        query = query.eq("chauffage", chauffage.trim());
+      }
+
+      // 🔹 Filtre "pièces"
+      if (pieces !== "Tous") {
+        if (pieces === "+6") {
+          // ⚙️ Supabase -> .gt = "greater than"
+          query = query.gt("pieces", 6);
+        } else {
+          query = query.eq("pieces", parseInt(pieces, 10));
+        }
+      }
+
+      // 🔹 Filtre "superficie"
+      if (superficie !== "Tous") {
+        if (superficie === "+300") {
+          // ⚙️ Supabase -> .gt = "greater than"
+          query = query.lt("superficie", 300);
+        } else {
+          query = query.gt("superficie", parseInt(superficie, 10));
+        }
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error("Erreur Supabase :", error);
         alert("Erreur lors du chargement des annonces");
       } else {
-        data.map((row) => (
-          console.log(row)
-        ))
         setRows(data);
       }
 

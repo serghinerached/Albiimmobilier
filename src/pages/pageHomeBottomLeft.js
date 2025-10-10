@@ -13,7 +13,7 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
   // Type
   const [draftChauffage, setDraftChauffage] = useState("Tous");
   const [selectedChauffage, setSelectedChauffage] = useState("");
-  const tabLibChauffage = ["Electricité", "Gaz","Fioul","Pompe à chaleur","Bois"];
+  const tabLibChauffage = ["Electrique", "Gaz","Fioul","Pompe à chaleur","Bois"];
   const handleSelectChauffageChange = (event) => setDraftChauffage(event.target.value);
 
   // Pieces
@@ -25,13 +25,13 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
   // Superficie
   const [draftSuperficie, setDraftSuperficie] = useState("Tous");
   const [selectedSuperficie, setSelectedSuperficie] = useState("");
-  const tabLibSuperficie = ["50", "100","150","200","250","300","+300"];
+  const tabLibSuperficie = ["50 m2", "100 m2","150 m2","200 m2","250 m2","300 m2","+300 m2"];
   const handleSelectSuperficieChange = (event) => setDraftSuperficie(event.target.value);
 
   // Prix
   const [draftPrix, setDraftPrix] = useState("Tous");
   const [selectedPrix, setSelectedPrix] = useState("");
-  const tabLibPrix = ["50 000", "100 000","150 000","200 000","250 000","300 000","+300 000"];
+  const tabLibPrix = ["50 000 €", "100 000 €","150 000 €","200 000 €","250 000 €","300 000 €","+300 000 €"];
   const handleSelectPrixChange = (event) => setDraftPrix(event.target.value);
 
 
@@ -97,7 +97,7 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
             </tr>
 
             <tr style={styles.trTableRecherche}>
-              <td style={{paddingRight:"6px"}}>Superficie Max (m2)</td>
+              <td style={{paddingRight:"6px"}}>Superficie Min</td>
               <td>
                 <select value={draftSuperficie} onChange={handleSelectSuperficieChange}>
                   <option value="Tous">Tous</option>
@@ -111,7 +111,7 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
             </tr>
 
             <tr style={styles.trTableRecherche}>
-              <td>Prix Max (€)</td>
+              <td>Prix<br></br> Max</td>
               <td>
                 <select value={draftSuperficie} onChange={handleSelectPrixChange}>
                   <option value="Tous">Tous</option>
