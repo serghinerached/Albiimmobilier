@@ -30,12 +30,12 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
   useEffect(() => {
     const handleFiltrer = async () => {
       setLoading(true);
-      console.log("handleFiltrer");
 
-      const type = tabSelect[1];        // ex: "Tous" ou "Maison"
+      const type = tabSelect[1];      
       const chauffage = tabSelect[2];  
       const pieces = tabSelect[3];     
-      const superficie = tabSelect[4].split(" ");     
+      const superficie = tabSelect[4]; 
+      const prix = tabSelect[5]; 
 
       let query = supabase.from("Annonce").select("*");
 
@@ -61,12 +61,13 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
 
       // 🔹 Filtre "superficie"
       if (superficie !== "Tous") {
-        if (superficie === "+300") {
-          // ⚙️ Supabase -> .gt = "greater than"
-          query = query.lt("superficie", 300);
-        } else {
-          query = query.gt("superficie", parseInt(superficie, 10));
-        }
+        query = query.gte("superficie", parseInt(superficie, 10));
+      }
+
+      // 🔹 Filtre "prix"
+      if (prix !== "Tous") {
+        console.log(parseInt(prix, 10), typeof(parseInt(prix, 10)))
+        query = query.lte("prix", parseInt(prix, 10));
       }
 
       const { data, error } = await query;
@@ -96,6 +97,11 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
       : images("./default.png"); // fallback
   };
 
+  function formatPrix(valeur) {
+    const num = Number(String(valeur).replace(/[^\d.-]/g, ""));
+    return isNaN(num) ? "" : `${num.toLocaleString("fr-FR")} €`;
+  }
+
   // -----------------------------------
 
   if (loading) return <div>Chargement...</div>;
@@ -115,7 +121,7 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
             <tr style={{ color: "white", backgroundColor: "#D2691E" }}>
               <td style={{ padding: "5px", width: "37%" }}>{row.type}</td>
               <td colSpan={3} align="right" style={{ paddingRight: "10px" }}>
-                {row.prix} €
+                {formatPrix(row.prix)}
               </td>
             </tr>
 

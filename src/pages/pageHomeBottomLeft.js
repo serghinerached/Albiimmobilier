@@ -25,28 +25,16 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
   // Superficie
   const [draftSuperficie, setDraftSuperficie] = useState("Tous");
   const [selectedSuperficie, setSelectedSuperficie] = useState("");
-  const tabLibSuperficie = ["50 m2", "100 m2","150 m2","200 m2","250 m2","300 m2","+300 m2"];
+  const tabLibSuperficie = ["50", "100","150","200","250","300"];
   const handleSelectSuperficieChange = (event) => setDraftSuperficie(event.target.value);
 
   // Prix
   const [draftPrix, setDraftPrix] = useState("Tous");
   const [selectedPrix, setSelectedPrix] = useState("");
-  const tabLibPrix = ["50 000 €", "100 000 €","150 000 €","200 000 €","250 000 €","300 000 €","+300 000 €"];
+  const tabLibPrix = ["50000", "100000","150000","200000","250000","300000","500000","1000000","10000000"];
   const handleSelectPrixChange = (event) => setDraftPrix(event.target.value);
 
 
-  // Validation au clic
-  /*
-  const handleFilterClick = () => {
-    setSelectedType(draftType);
-    setSelectedChauffage(draftChauffage);
-    setSelectedPieces(draftPieces);
-    setSelectedSuperficie(draftSuperficie);
-    setSelectedPrix(draftPrix);
-    alert("draftType : " + draftType + " selectedType : " + selectedType)
-  };
-*/
-  
   //******************* 
 
 
@@ -103,7 +91,7 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
                   <option value="Tous">Tous</option>
                   {tabLibSuperficie.map((libSuperficie, index) => (
                     <option key={index} value={libSuperficie}>
-                      {libSuperficie}
+                      {libSuperficie} m2
                     </option>
                   ))}
                 </select>
@@ -111,13 +99,13 @@ function DivPageHomeBottomLeft({ onFilterClick }) {
             </tr>
 
             <tr style={styles.trTableRecherche}>
-              <td>Prix<br></br> Max</td>
+              <td>Prix Max</td>
               <td>
-                <select value={draftSuperficie} onChange={handleSelectPrixChange}>
+                <select value={draftPrix} onChange={handleSelectPrixChange}>
                   <option value="Tous">Tous</option>
                   {tabLibPrix.map((libPrix, index) => (
                     <option key={index} value={libPrix}>
-                      {libPrix}
+                      {Number(libPrix).toLocaleString("fr-FR")} € {/* pour sep millier */}
                     </option>
                   ))}
                 </select>

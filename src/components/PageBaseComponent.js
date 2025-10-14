@@ -28,7 +28,8 @@ class PageBaseComponent extends React.Component {
     super(props);
     this.state = {
       selectedText: null, // 👉 on stocke ici le texte cliqué
-      selectedTab: []
+      selectedTab: [],
+      selectedPage: "accueil"
     };
   }
 
@@ -39,6 +40,33 @@ class PageBaseComponent extends React.Component {
   handleFilterClick = (tabSelect) => {
     this.setState({ selectedTab: tabSelect}); // 👉 met à jour l’état
   };
+
+  handlePageChange = (page) => {
+    this.setState({ selectedPage: page });
+  };
+
+  //--------------
+  renderContent() {
+    const { selectedPage } = this.state;
+
+    switch (selectedPage) {
+      case "vendre":
+        return <div style={{ padding: 20 }}>🏡 <b>Bienvenue sur la page Vendre !</b><br />Ici vous pourrez mettre votre bien en vente.</div>;
+      case "compte":
+        return <div style={{ padding: 20 }}>👤 Espace Mon compte</div>;
+      case "contact":
+        return <div style={{ padding: 20 }}>📞 Contactez-nous ici.</div>;
+      default:
+        return (
+          <DivPageHomeBottomCenter
+            onTextClick={this.handleTextClick}
+            tabSelect={this.state.selectedTab}
+          />
+        );
+    }
+  }
+
+  //-------------
 
 
   render () {   
@@ -57,26 +85,26 @@ class PageBaseComponent extends React.Component {
 
           <nav className="navbar">
             <div className="navbar-container">
+              {/*
               <ul className="nav-links" >
-                <li>
-                  <Link style={{fontWeight:"bold"}} to="/">Accueil</Link>
-                </li>
-                <li>
-                  <Link style={{fontWeight:"bold"}} to="/about">Vendre</Link>
-                </li>
-                <li>
-                  <Link style={{fontWeight:"bold"}} to="/services">Mon compte</Link>
-                </li>
-                <li>
-                  <Link style={{fontWeight:"bold"}} to="/contact">Contact</Link>
-                </li>
+                <li><Link style={{fontWeight:"bold"}} to="/">Accueil</Link></li>
+                <li><Link style={{fontWeight:"bold"}} to="/vendre">Vendre</Link></li>
+                <li><Link style={{fontWeight:"bold"}} to="/compte">Mon compte</Link></li>
+                <li><Link style={{fontWeight:"bold"}} to="/contact">Contact</Link></li>
+              </ul>
+              */}
+               <ul className="nav-links">
+                <li><button onClick={() => this.handlePageChange("accueil")} style={styles.navButton}>Accueil</button></li>
+                <li><button onClick={() => this.handlePageChange("vendre")} style={styles.navButton}>Vendre</button></li>
+                <li><button onClick={() => this.handlePageChange("compte")} style={styles.navButton}>Mon compte</button></li>
+                <li><button onClick={() => this.handlePageChange("contact")} style={styles.navButton}>Contact</button></li>
               </ul>
             </div>
           </nav>
 
         </div>
 
-        <div style={{display: "flex", height: "calc(100vh - 100px)" }}>
+        <div id="divBase" style={{display: "flex", height: "calc(100vh - 100px)" }}>
 
           <div style={styles.divHomeBottomLeft}>
             <DivPageHomeBottomLeft onFilterClick={this.handleFilterClick}/>

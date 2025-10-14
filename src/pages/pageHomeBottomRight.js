@@ -9,6 +9,11 @@ function DivPageHomeBottomRight({ row }) {
     <div></div>;
   }
 
+function formatPrix(valeur) {
+  const num = Number(String(valeur).replace(/[^\d.-]/g, ""));
+  return isNaN(num) ? "" : `${num.toLocaleString("fr-FR")} €`;
+}
+
   // pour photos dynamiques
   const images = require.context("../photos", false, /\.(png|jpe?g|svg)$/);
   const getImage = (nameImage) => {
@@ -26,7 +31,7 @@ function DivPageHomeBottomRight({ row }) {
 
           <tr style={{color:"white",backgroundColor:"#D2691E"}}>
             <td style={{padding:"5px",width:"37%"}}>{row.type}</td>
-            <td colSpan={3} align='right' style={{paddingRight:"10px"}}>{`${row.prix} €`}</td>
+            <td colSpan={3} align='right' style={{paddingRight:"10px"}}>{formatPrix(row.prix)}</td>
           </tr>
 
           <tr style={{color:"black"}}>

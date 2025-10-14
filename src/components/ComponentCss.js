@@ -181,6 +181,15 @@ export const styles = {
     whiteSpace: "pre-line"
   },
 
+   navButton: {
+    background: "none",
+    border: "none",
+    fontWeight: "bold",
+    color: "black",
+    cursor: "pointer",
+  },
+ 
+
 
   }
 
