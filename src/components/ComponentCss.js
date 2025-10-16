@@ -38,6 +38,9 @@ export const styles = {
     display:"flex", 
     flexDirection: "column",
     minHeight: 0, 
+    overflowY: "auto",      // 👉 permet le scroll vertical
+    overflowX: "hidden",    // évite le scroll horizontal
+    height: "100%",     
   },
 
   divHomeBasRight: {
@@ -109,6 +112,17 @@ export const styles = {
     border:'3px solid black',
     display: 'inline-block',
   },
+
+
+  btnLogin: {
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    cursor: 'pointer',
+    width: '100%',
+  },
+
   divImport:{
     marginLeft:'230px',
     marginBottom:'5px',

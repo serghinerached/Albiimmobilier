@@ -1,20 +1,6 @@
 import React from 'react';
+import {styles} from '../components/ComponentCss';
 
-// Je suppose que votre objet 'styles' ressemble à ça.
-// Vous pouvez l'adapter selon vos besoins.
-const styles = {
-  trTableRecherche: {
-    // styles pour vos lignes
-  },
-  btnOk: {
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    padding: '10px 15px',
-    border: 'none',
-    cursor: 'pointer',
-    width: '100%',
-  }
-};
 
 function DivPageLogin({ onNavigateToInscription }) {
 
@@ -46,7 +32,7 @@ function DivPageLogin({ onNavigateToInscription }) {
             {/* Correction : On utilise l'attribut 'colSpan' (pas dans le style) pour fusionner les colonnes */}
             <td colSpan="2">
               <button
-                style={{ marginTop: "10px", ...styles.btnOk }}
+                style={{ marginTop: "10px", ...styles.btnLogin }}
                 onClick={() => { alert('Bouton cliqué !'); }}
               >
                 Connexion

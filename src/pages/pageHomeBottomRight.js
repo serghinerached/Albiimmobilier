@@ -43,7 +43,7 @@ function formatPrix(valeur) {
               chauffage : {row.chauffage} <br></br><br></br>
               Plus d'infos : {row.infos} <br></br><br></br>
 
-              Contacts : {row.contact} <br></br>
+              Contacts : {row.pseudo} <br></br>
             </td>
           
             <td style={{
