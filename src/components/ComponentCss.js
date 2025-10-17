@@ -104,7 +104,8 @@ export const styles = {
     display: 'inline-block',
     marginLeft:'10px'
   },
-    btnOk: {
+
+  btnOk: {
     width:'90px',
     backgroundColor: 'green',
     color:'white',
@@ -113,6 +114,14 @@ export const styles = {
     display: 'inline-block',
   },
 
+   btnCreerAnnonce: {
+    width:'90px',
+    backgroundColor: 'green',
+    color:'white',
+    fontweight:'bold',
+    border:'1px solid black',
+    display: 'inline-block',
+  },
 
   btnLogin: {
     backgroundColor: '#4CAF50',
@@ -202,8 +211,22 @@ export const styles = {
     color: "black",
     cursor: "pointer",
   },
- 
 
+  tdTabMesAnnonces: {
+    padding: "5px",
+    textAlign: "center",
+    backgroundColor: "lightgray",
+  },
+ 
+  btnValiderInscription: {
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    padding: '10px 15px',
+    border: 'none',
+    cursor: 'pointer',
+    width: '100%',
+    marginTop: "5px"
+  }
 
   }
 

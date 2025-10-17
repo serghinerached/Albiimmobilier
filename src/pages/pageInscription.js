@@ -1,54 +1,101 @@
 // Fichier : DivPageInscription.js
-import React from 'react';
+import React, { useState } from "react";
+import styles from '../components/ComponentCss';
+import { supabase } from '../components/ReadSupabase/supabaseClient';
 
-// Vous pouvez définir ou importer vos styles ici
-const styles = {
-    btnOk: {
-        backgroundColor: '#4CAF50',
-        color: 'white',
-        padding: '10px 15px',
-        border: 'none',
-        cursor: 'pointer',
-        width: '100%',
+
+function DivPageInscription() {
+  // 🔹 États pour stocker les valeurs du formulaire
+  const [pseudo, setPseudo] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  // 🔹 Fonction appelée quand on clique sur "Valider"
+  const handleSubmit = async () => {
+    if (!pseudo || !email || !password) {
+      setMessage("Merci de remplir tous les champs !");
+      return;
     }
-};
 
-// Ce composant reçoit une fonction `onNavigateToLogin` via ses props
-// pour pouvoir demander au composant parent de ré-afficher le login.
-function DivPageInscription({ onNavigateToLogin }) {
+    try {
+      // 👉 Insère dans la table "Account"
+      const { data, error } = await supabase
+        .from("Account")
+        .insert([{ pseudo, email, password }]);
 
-  const handleLinkClick = (event) => {
-    // On empêche le comportement par défaut du lien (qui rechargerait la page)
-    event.preventDefault();
-    // On exécute la fonction passée par le parent
-    onNavigateToLogin();
+      if (error) throw error;
+      setMessage("✅ Compte créé avec succès !");
+      setPseudo("");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      console.error(err);
+      setMessage("❌ Erreur lors de l'inscription : " + err.message);
+    }
   };
 
   return (
     <div>
-      <table style={{ border: "1px solid black", marginLeft: "50px", padding: "10px", borderCollapse: "separate", borderSpacing: "0 10px" }}>
+      <table
+        style={{border: "1px solid black",marginLeft: "50px",padding: "10px",borderCollapse: "separate",borderSpacing: "0 10px",}}
+      >
         <tbody>
           <tr>
-            <td colSpan="2" style={{textAlign:"center", paddingBottom:"10px"}}><h3>Créer un compte</h3></td>
+            <td colSpan="2" style={{ textAlign: "center", paddingBottom: "10px" }}>
+              <h3>Créer un compte</h3>
+            </td>
           </tr>
           <tr>
             <td style={{ paddingRight: "10px" }}>Pseudo</td>
-            <td><input type="text" style={{marginLeft:"10px"}}/></td>
+            <td>
+              <input
+                type="text"
+                value={pseudo}
+                onChange={(e) => setPseudo(e.target.value)}
+                style={{ marginLeft: "10px" }}
+              />
+            </td>
           </tr>
           <tr>
             <td>Email</td>
-            <td><input type="email" style={{marginLeft:"10px"}}/></td>
+            <td>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{ marginLeft: "10px" }}
+              />
+            </td>
           </tr>
           <tr>
             <td>Password</td>
-            <td><input type="password" style={{marginLeft:"10px"}}/></td>
-          </tr>
-          <tr>
-            <td colSpan="2">
-              <button style={{ marginTop: "10px", ...styles.btnOk }}>S'inscrire</button>
+            <td>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ marginLeft: "10px" }}
+              />
             </td>
           </tr>
-         
+          <tr>
+            <td colSpan="2" style={styles.btnValiderInscription}>
+              <button
+                style={styles.btnValiderInscription}
+                onClick={handleSubmit}
+              >
+                Valider
+              </button>
+            </td>
+          </tr>
+          {message && (
+            <tr>
+              <td colSpan="2" style={{ textAlign: "center", paddingTop: "10px" }}>
+                {message}
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

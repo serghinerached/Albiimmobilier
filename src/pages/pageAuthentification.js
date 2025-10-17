@@ -8,9 +8,9 @@ function DivPageAuthentification() {
   const [showLogin, setShowLogin] = useState(true);
 
   if (showLogin) {
-    return <DivPageLogin onNavigateToInscription={() => setShowLogin(false)} />;
+    return <DivPageLogin onNavigateToLogin={() => setShowLogin(false)} />;
   } else {
-    return <DivPageInscription onNavigateToLogin={() => setShowLogin(true)} />;
+    return <DivPageInscription DivPageInscription={() => setShowLogin(true)} />;
   }
 }
 
