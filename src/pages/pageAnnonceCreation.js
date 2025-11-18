@@ -63,7 +63,7 @@ function DivPageAnnonceCreation({ onFilterClick }) {
             <tr style={styles.trTableRecherche}>
               <td>Type</td>
               <td>
-                <select onChange={(e) => setPseudo(e.target.value)}>
+                <select onChange={handleSelectTypeChange}>
                   <option value=""></option>
                   {tabLibType.map((libType, index) => (
                     <option key={index} value={libType}>
@@ -77,7 +77,7 @@ function DivPageAnnonceCreation({ onFilterClick }) {
             <tr style={styles.trTableRecherche}>
               <td>Chauffage</td>
               <td>
-                <select onChange="">
+                <select onChange={handleSelectChauffageChange}>
                   <option value=""></option>
                   {tabLibChauffage.map((libChauffage, index) => (
                     <option key={index} value={libChauffage}>
@@ -98,14 +98,14 @@ function DivPageAnnonceCreation({ onFilterClick }) {
             <tr style={styles.trTableRecherche}>
               <td style={{paddingRight:"6px"}}>Superficie</td>
               <td>
-                <input type='text' size={10} ></input>
+                <input type='text' size={5} ></input> m2
               </td>
             </tr>
 
             <tr style={styles.trTableRecherche}>
               <td>Prix</td>
               <td>
-                <input type='text'></input>
+                <input type='text' size={5}></input> €
               </td>
             </tr>
 
