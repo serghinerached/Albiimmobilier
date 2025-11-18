@@ -2,18 +2,20 @@
 import React, { useState } from "react";
 import styles from '../components/ComponentCss';
 import { supabase } from '../components/ReadSupabase/supabaseClient';
+import DivPageVendre from './pageVendre';
 
 
 function DivPageInscription() {
   // 🔹 États pour stocker les valeurs du formulaire
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [pwd, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [valid,setValid] = useState(false)
 
   // 🔹 Fonction appelée quand on clique sur "Valider"
   const handleSubmit = async () => {
-    if (!pseudo || !email || !password) {
+    if (!pseudo || !email || !pwd) {
       setMessage("Merci de remplir tous les champs !");
       return;
     }
@@ -22,18 +24,23 @@ function DivPageInscription() {
       // 👉 Insère dans la table "Account"
       const { data, error } = await supabase
         .from("Account")
-        .insert([{ pseudo, email, password }]);
+        .insert([{ pseudo, email, pwd }]);
 
       if (error) throw error;
-      setMessage("✅ Compte créé avec succès !");
-      setPseudo("");
-      setEmail("");
-      setPassword("");
+        setValid(true);
     } catch (err) {
+      setValid(false);
       console.error(err);
       setMessage("❌ Erreur lors de l'inscription : " + err.message);
     }
   };
+
+
+  if (valid === true) {
+    return (
+      <DivPageVendre tabLogin={[pseudo,pwd,email]}/>
+    );
+  } else {
 
   return (
     <div>
@@ -53,7 +60,7 @@ function DivPageInscription() {
                 type="text"
                 value={pseudo}
                 onChange={(e) => setPseudo(e.target.value)}
-                style={{ marginLeft: "10px" }}
+                style={{ marginLeft: "10px",width:120 }}
               />
             </td>
           </tr>
@@ -64,7 +71,7 @@ function DivPageInscription() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{ marginLeft: "10px" }}
+                style={{ marginLeft: "10px",width:120 }}
               />
             </td>
           </tr>
@@ -73,19 +80,16 @@ function DivPageInscription() {
             <td>
               <input
                 type="password"
-                value={password}
+                value={pwd}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{ marginLeft: "10px" }}
+                style={{ marginLeft: "10px",width:120 }}
               />
             </td>
           </tr>
           <tr>
-            <td colSpan="2" style={styles.btnValiderInscription}>
+            <td colSpan="2" >
               <button
-                style={styles.btnValiderInscription}
-                onClick={handleSubmit}
-              >
-                Valider
+                style={styles.btnValiderInscription} onClick={handleSubmit} >Valider
               </button>
             </td>
           </tr>
@@ -100,6 +104,7 @@ function DivPageInscription() {
       </table>
     </div>
   );
+}
 }
 
 export default DivPageInscription;

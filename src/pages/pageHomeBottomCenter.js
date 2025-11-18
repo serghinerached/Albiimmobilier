@@ -130,7 +130,7 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
                 style={{
                   padding: "5px",
                   textAlign: "left",
-                  backgroundColor: "lightgray",
+                  backgroundColor: "white",
                 }}
               >
                 Paru le {new Date(row.created).toLocaleDateString()} <br />

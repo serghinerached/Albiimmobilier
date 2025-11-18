@@ -36,7 +36,7 @@ function formatPrix(valeur) {
 
           <tr style={{color:"black"}}>
 
-            <td style={{verticalAlign:"top",padding:"10px",textAlign:"left",backgroundColor:"lightgray",wordBreak: "break-word"}} rowspan="3">
+            <td style={{verticalAlign:"top",padding:"10px",textAlign:"left",backgroundColor:"white",wordBreak: "break-word"}} rowspan="3">
               Paru le {new Date(row.created).toLocaleDateString()} <br></br><br></br>
               Superficie : {row.superficie} m2 <br></br>
               Pièces: {row.pieces} <br></br>

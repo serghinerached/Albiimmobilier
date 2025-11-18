@@ -4,7 +4,6 @@ import DivPageVendre from './pageVendre';
 import DivPageInscription from './pageInscription';
 
 
-//function DivPageLogin({handleLoginClick, onNavigateToInscription }) {
 class DivPageLogin extends React.Component {
 
   constructor(props) {
@@ -116,8 +115,7 @@ class DivPageLogin extends React.Component {
                 <td colSpan="2">
                   <button
                     style={{ marginTop: "10px", ...styles.btnLogin }}
-                    onClick={this.handleLoginClick}
-                  >
+                    onClick={this.handleLoginClick}>
                     Connexion
                   </button>
                 </td>

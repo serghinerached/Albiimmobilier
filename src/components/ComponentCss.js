@@ -215,7 +215,7 @@ export const styles = {
   tdTabMesAnnonces: {
     padding: "5px",
     textAlign: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "white",
   },
  
   btnValiderInscription: {
@@ -225,7 +225,7 @@ export const styles = {
     border: 'none',
     cursor: 'pointer',
     width: '100%',
-    marginTop: "5px"
+    marginTop: "5px",
   }
 
   }

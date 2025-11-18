@@ -54,7 +54,7 @@ class PageBaseComponent extends React.Component {
       case "vendre":
         return <div style={{padding: 20 }}><DivPageAuthentification /></div>;
       case "compte":
-        return <div style={{ padding: 20 }}>👤 Mon compte</div>;
+        return <div style={{ padding: 20 }}><DivPageAuthentification /></div>;
       case "contact":
         return <div style={{ padding: 20 }}>📞 Contactez-nous ici.</div>;
       default:
