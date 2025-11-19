@@ -71,6 +71,7 @@ function DivPageVendre({tabLogin}) {
                     <th  style={{ padding: "5px",border:"1px solid black" }}>Num</th> 
                     <th  style={{ padding: "5px",border:"1px solid black" }}>Date</th> 
                     <th  style={{ padding: "5px",border:"1px solid black"}}>Type</th> 
+                    <th  style={{ padding: "5px",border:"1px solid black"}}>Validé</th> 
                     <th  style={{ padding: "5px",border:"1px solid black" }}>Modifier</th> 
                     <th  style={{ padding: "5px",border:"1px solid black" }}>Supprimer</th> 
                 </tr>
@@ -80,6 +81,7 @@ function DivPageVendre({tabLogin}) {
                     <td style={styles.tdTabMesAnnonces}>{row.id}</td>
                     <td style={styles.tdTabMesAnnonces}>{new Date(row.created).toLocaleDateString()}</td>
                     <td style={styles.tdTabMesAnnonces}>{row.type}</td>
+                    <td style={styles.tdTabMesAnnonces}>{row.valide}</td>
                     <td style={styles.tdTabMesAnnonces}>
                         <FaEdit size={20} style={styles.colMessages} onClick=""/>
                     </td>

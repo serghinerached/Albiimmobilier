@@ -13,7 +13,8 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
       setLoading(true);
       const { data, error } = await supabase
         .from("Annonce")
-        .select("*");
+        .select("*")
+        .eq("valide", "Oui");   
 
       if (error) {
         console.error("Erreur :", error);
@@ -37,7 +38,7 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
       const superficie = tabSelect[4]; 
       const prix = tabSelect[5]; 
 
-      let query = supabase.from("Annonce").select("*");
+      let query = supabase.from("Annonce").select("*").eq("valide", "Oui");
 
       // 🔹 Appliquer le filtre sur le type si différent de "Tous"
       if (type !== "Tous") {
@@ -133,6 +134,7 @@ function DivPageHomeBottomCenter({ onTextClick, tabSelect }) {
                   backgroundColor: "white",
                 }}
               >
+                Annonce n° {row.id} <br />
                 Paru le {new Date(row.created).toLocaleDateString()} <br />
                 {row.superficie} m² <br />
                 {row.pieces} pièces <br />
