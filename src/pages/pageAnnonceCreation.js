@@ -1,178 +1,190 @@
 import {styles} from '../components/ComponentCss';
 import {useState} from "react";
+import { supabase } from '../components/ReadSupabase/supabaseClient';
+import DivPageVendre from './pageVendre';
+
 
 function DivPageAnnonceCreation({ onFilterClick }) {
   const [message, setMessage] = useState("");
+  const [valid,setValid] = useState(false)
 
   // Type
-  const [selectedType, setSelectedType] = useState("");
+  const [type, setType] = useState("");
   const tabLibType = ["Maison", "Appartement"];
-  const handleSelectTypeChange = (event) => setSelectedType(event.target.value);
+  const handleTypeChange = (event) => setType(event.target.value);
   
 
   // chauffage
-  const [selectedChauffage, setSelectedChauffage] = useState("");
+  const [chauffage, setChauffage] = useState("");
   const tabLibChauffage = ["Electrique", "Gaz","Fioul","Pompe à chaleur","Bois"];
-  const handleSelectChauffageChange = (event) => setSelectedChauffage(event.target.value);
+  const handleChauffageChange = (event) => setChauffage(event.target.value);
 
   // Pieces
-  const [selectedPieces, setSelectedPieces] = useState("");
-  const handleSelectPiecesChange = (event) => setSelectedPieces(event.target.value);
+  const [pieces, setPieces] = useState("");
+  const handlePiecesChange = (event) => setPieces(event.target.value);
 
   // Superficie
-  const [selectedSuperficie, setSelectedSuperficie] = useState("");
-  const handleSelectSuperficieChange = (event) => setSelectedSuperficie(event.target.value);
+  const [superficie, setSuperficie] = useState("");
+  const handleSuperficieChange = (event) => setSuperficie(event.target.value);
 
    // dpe
-  const [selectedDpe, setSelectedDpe] = useState("");
+  const [dpe, setDpe] = useState("");
   const tabLibDpe = ["En cours", "A","B","C","D","E","F","G"];
-  const handleSelectDpeChange = (event) => setSelectedDpe(event.target.value);
+  const handleDpeChange = (event) => setDpe(event.target.value);
 
    // Ges
-  const [selectedGes, setSelectedGes] = useState("");
+  const [ges, setGes] = useState("");
   const tabLibGes = ["En cours", "A","B","C","D","E","F","G"];
-  const handleSelectGesChange = (event) => setSelectedGes(event.target.value);
+  const handleGesChange = (event) => setGes(event.target.value);
 
   // Prix
-  const [selectedPrix, setSelectedPrix] = useState("");
-  const handleSelectPrixChange = (event) => setSelectedPrix(event.target.value);
+  const [infos, setInfos] = useState("");
+  const handleInfosChange = (event) => setInfos(event.target.value);
+
+  // Prix
+  const [prix, setPrix] = useState("");
+  const handlePrixChange = (event) => setPrix(event.target.value);
 
 
   // 🔹 Fonction appelée quand on clique sur "Valider"
     const handleSubmit = async () => {
-      if (!selectedType || !selectedChauffage || !selectedPieces || !selectedSuperficie || !selectedPrix
-        || !selectedDpe || !selectedGes) {
+      if (!type  || !chauffage || !pieces || !superficie || !dpe || !ges || !infos || !prix) {
         setMessage("Merci de remplir tous les champs !");
         return;
       }
-      alert("ok")
-  /*
+  
       try {
         // 👉 Insère dans la table "Account"
         const { data, error } = await supabase
-          .from("Account")
-          .insert([{ pseudo, email, pwd }]);
+          .from("Annonce")
+          .insert([{type:type,chauffage:chauffage,pieces: pieces,superficie: superficie, prix:prix,infos:infos,dpe: dpe,ges:ges,pseudo:"mimi",valide:"En cours" }]);
   
         if (error) throw error;
           setValid(true);
+
       } catch (err) {
         setValid(false);
-        console.error(err);
-        setMessage("❌ Erreur lors de l'inscription : " + err.message);
+        console.error("ERROR :" + err.message);
+        setMessage("❌ Erreur lors de la creation : " + err.message);
       }
-        */
     };
 
 
   //******************* 
 
+   if (valid === true) {
+    return (
+      <DivPageVendre tabLogin={["mimi","xxx","yyyy"]}/>
+    ); 
+  } else {
 
-  return  <div >
-                    
-            <table style={{marginleft:"50px",padding:"10px"}}>
+    return  <div >
+                      
+              <table style={{marginleft:"50px",padding:"10px"}}>
 
-              <tr>
-                <td style={{verticalAlign:"top"}}>
-                  <table>
-                    <tr style={styles.trTableRecherche}>
-                      <td>Type</td>
-                      <td>
-                        <select onChange={handleSelectTypeChange}>
-                          <option value=""></option>
-                          {tabLibType.map((libType, index) => (
-                            <option key={index} value={libType}>
-                              {libType}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                    </tr>
+                <tr>
+                  <td style={{verticalAlign:"top"}}>
+                    <table>
+                      <tr style={styles.trTableRecherche}>
+                        <td>Type</td>
+                        <td>
+                          <select onChange={handleTypeChange}>
+                            <option value=""></option>
+                            {tabLibType.map((libType, index) => (
+                              <option key={index} value={libType}>
+                                {libType}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                      </tr>
 
-                    <tr style={styles.trTableRecherche}>
-                      <td>Chauffage</td>
-                      <td>
-                        <select onChange={handleSelectChauffageChange}>
-                          <option value=""></option>
-                          {tabLibChauffage.map((libChauffage, index) => (
-                            <option key={index} value={libChauffage}>
-                              {libChauffage}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                    </tr>
+                      <tr style={styles.trTableRecherche}>
+                        <td>Chauffage</td>
+                        <td>
+                          <select onChange={handleChauffageChange}>
+                            <option value=""></option>
+                            {tabLibChauffage.map((libChauffage, index) => (
+                              <option key={index} value={libChauffage}>
+                                {libChauffage}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                      </tr>
 
-                    <tr style={styles.trTableRecherche}>
-                      <td>Pièces</td>
-                      <td>
-                        <input type='text' size={5} ></input>
-                      </td>
-                    </tr>
+                      <tr style={styles.trTableRecherche}>
+                        <td>Pièces</td>
+                        <td>
+                          <input type='text' size={5} onChange={handlePiecesChange}></input>
+                        </td>
+                      </tr>
 
-                    <tr style={styles.trTableRecherche}>
-                      <td style={{paddingRight:"6px"}}>Superficie</td>
-                      <td>
-                        <input type='text' size={5} ></input> m2
-                      </td>
-                    </tr>
+                      <tr style={styles.trTableRecherche}>
+                        <td style={{paddingRight:"6px"}}>Superficie</td>
+                        <td>
+                          <input type='text' size={5} onChange={handleSuperficieChange}></input> m2
+                        </td>
+                      </tr>
 
-                    <tr style={styles.trTableRecherche}>
-                      <td>DPE</td>
-                      <td>
-                        <select onChange={handleSelectDpeChange}>
-                          <option value=""></option>
-                          {tabLibDpe.map((libDpe, index) => (
-                            <option key={index} value={libDpe}>
-                              {libDpe}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                    </tr>
+                      <tr style={styles.trTableRecherche}>
+                        <td>DPE</td>
+                        <td>
+                          <select onChange={handleDpeChange}>
+                            <option value=""></option>
+                            {tabLibDpe.map((libDpe, index) => (
+                              <option key={index} value={libDpe}>
+                                {libDpe}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                      </tr>
 
-                    <tr style={styles.trTableRecherche}>
-                      <td>GES</td>
-                      <td>
-                        <select onChange={handleSelectGesChange}>
-                          <option value=""></option>
-                          {tabLibGes.map((libGes, index) => (
-                            <option key={index} value={libGes}>
-                              {libGes}
-                            </option>
-                          ))}
-                        </select>
-                      </td>
-                    </tr>
+                      <tr style={styles.trTableRecherche}>
+                        <td>GES</td>
+                        <td>
+                          <select onChange={handleGesChange}>
+                            <option value=""></option>
+                            {tabLibGes.map((libGes, index) => (
+                              <option key={index} value={libGes}>
+                                {libGes}
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                      </tr>
 
-                    <tr style={styles.trTableRecherche}>
-                      <td>Prix</td>
-                      <td>
-                        <input type='text' size={5}></input> €
-                      </td>
-                    </tr>
+                      <tr style={styles.trTableRecherche}>
+                        <td>Prix</td>
+                        <td>
+                          <input type='text' size={5} onChange={handlePrixChange}></input> €
+                        </td>
+                      </tr>
 
-                  </table>
-                </td>
-
-                <td style={{verticalAlign:"top",paddingLeft:25}}>
-                  <table>
-                    <tr style={styles.trTableRecherche}>
-                      <td style={{verticalAlign:"top",paddingRight:"10px"}}>+ d'infos</td>
-                      <td>
-                        <textarea rows="20" cols="100" />                   
-                      </td>
-                    </tr>
-
-                  </table>
-                </td>
-
-                 <td style={{verticalAlign:"top",paddingLeft:10}}>
-                    <button style={styles.btnOk}
-                    onClick="" >Valider</button>
+                    </table>
                   </td>
-              </tr>
-            </table>
-          </div>        
+
+                  <td style={{verticalAlign:"top",paddingLeft:25}}>
+                    <table>
+                      <tr style={styles.trTableRecherche}>
+                        <td style={{verticalAlign:"top",paddingRight:"10px"}}>+ d'infos</td>
+                        <td>
+                          <textarea rows="20" cols="100" onChange={handleInfosChange}/>                   
+                        </td>
+                      </tr>
+
+                    </table>
+                  </td>
+
+                  <td style={{verticalAlign:"top",paddingLeft:10}}>
+                      <button style={styles.btnOk}
+                      onClick={handleSubmit} >Valider</button>
+                    </td>
+                </tr>
+              </table>
+            </div>        
+  }
 }
 
 export default DivPageAnnonceCreation;

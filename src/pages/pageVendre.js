@@ -21,7 +21,10 @@ function DivPageVendre({tabLogin}) {
             setChPseudo(pseudo);
 
             let query = supabase.from("Annonce").select("*");
-            query = query.eq("pseudo",pseudo);
+            
+            if(pseudo !== "admin") {
+                query = query.eq("pseudo",pseudo);
+            }
 
             const { data, error } = await query
 
@@ -81,7 +84,15 @@ function DivPageVendre({tabLogin}) {
                     <td style={styles.tdTabMesAnnonces}>{row.id}</td>
                     <td style={styles.tdTabMesAnnonces}>{new Date(row.created).toLocaleDateString()}</td>
                     <td style={styles.tdTabMesAnnonces}>{row.type}</td>
-                    <td style={styles.tdTabMesAnnonces}>{row.valide}</td>
+                    <td
+                        style={{
+                            backgroundColor: row.valide === "En cours" ? "orange" : "lightgreen",
+                            ...styles.tdValide
+                        }}
+                        >
+                        {row.valide}
+                    </td>
+
                     <td style={styles.tdTabMesAnnonces}>
                         <FaEdit size={20} style={styles.colMessages} onClick=""/>
                     </td>

@@ -123,6 +123,15 @@ export const styles = {
     display: 'inline-block',
   },
 
+  btnValiderAnnonce: {
+    width:'70px',
+    backgroundColor: 'green',
+    color:'white',
+    fontweight:'bold',
+    border:'1px solid black',
+    display: 'inline-block',
+  },
+
   btnLogin: {
     backgroundColor: '#4CAF50',
     color: 'white',
@@ -216,6 +225,11 @@ export const styles = {
     padding: "5px",
     textAlign: "center",
     backgroundColor: "white",
+  },
+
+  tdValide: {
+    padding: "5px",
+    textAlign: "center",
   },
  
   btnValiderInscription: {
