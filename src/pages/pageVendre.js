@@ -4,17 +4,18 @@ import {useState,useEffect} from "react";
 import { FaEdit,FaTrash } from "react-icons/fa"; // Icône "Edit" de FontAwesome
 import DivPageAnnonceCreation from "./pageAnnonceCreation";
 
-function DivPageVendre({tabLogin}) {
+function DivPageVendre({onUpdateClick,tabLogin}) {
     const [rows, setRows] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [rowUpdate, setRowUpdate] = useState([]);
     const [chPseudo,setChPseudo] = useState("");
     const [create,setCreate] = useState(false)
+    const [mode,setMode] = useState("");
+
     
 
     // 🔹 Charger toutes les annonces au démarrage
       useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
 
             const pseudo = tabLogin[0];      
             const pwd = tabLogin[1];  
@@ -29,11 +30,10 @@ function DivPageVendre({tabLogin}) {
             const { data, error } = await query
 
             if (error) {
-            console.error("Erreur :", error);
+                alert("Erreur : " + error);
             } else {
-            setRows(data);
+                setRows(data);
             }
-            setLoading(false);
         };
     
         fetchData();
@@ -41,16 +41,26 @@ function DivPageVendre({tabLogin}) {
 
       //-----------------------
 
-      // 🔹 Fonction appelée quand on clique sur "Valider"
+    // 🔹 Fonction appelée quand on clique sur "Valider"
     const handleCreate = async () => {
         setCreate(true)
+        setMode("create")
     };
+
+    // 🔹 Fonction appelée quand on clique sur "update"
+    const handleUpdate = async (row) => {
+        setRowUpdate(row)
+        setCreate(true)
+        setMode("update")
+    };
+
+
 
     //-------------------------------------
 
     if(create === true) {
         return (
-            <DivPageAnnonceCreation/>
+            <DivPageAnnonceCreation  datas={[tabLogin[0],rowUpdate,mode]} />
         );
     } else {
 
@@ -86,7 +96,7 @@ function DivPageVendre({tabLogin}) {
                     <td style={styles.tdTabMesAnnonces}>{row.type}</td>
                     <td
                         style={{
-                            backgroundColor: row.valide === "En cours" ? "orange" : "lightgreen",
+                            backgroundColor: row.valide === "En cours" ? "orange" : "white",
                             ...styles.tdValide
                         }}
                         >
@@ -94,7 +104,7 @@ function DivPageVendre({tabLogin}) {
                     </td>
 
                     <td style={styles.tdTabMesAnnonces}>
-                        <FaEdit size={20} style={styles.colMessages} onClick=""/>
+                        <FaEdit size={20} style={styles.colMessages} onClick={() => handleUpdate(row)}/>
                     </td>
                     <td style={styles.tdTabMesAnnonces}>
                         <FaTrash  size={20} style={styles.colMessages} onClick=""/>
