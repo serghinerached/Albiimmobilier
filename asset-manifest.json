@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Albiimmobilier/static/css/main.7eb41528.css",
-    "main.js": "/Albiimmobilier/static/js/main.40969ee9.js",
+    "main.js": "/Albiimmobilier/static/js/main.74c9f4b2.js",
     "static/media/albi.jpg": "/Albiimmobilier/static/media/albi.30b42bc9da5e688e553e.jpg",
     "static/media/2-2.png": "/Albiimmobilier/static/media/2-2.81a60296486e17a798a4.png",
     "static/media/2-4.png": "/Albiimmobilier/static/media/2-4.e41bfff91bfd8de185c0.png",
@@ -31,10 +31,10 @@
     "static/media/inconnu.png": "/Albiimmobilier/static/media/inconnu.34cf9e82b584c3de37ed.png",
     "index.html": "/Albiimmobilier/index.html",
     "main.7eb41528.css.map": "/Albiimmobilier/static/css/main.7eb41528.css.map",
-    "main.40969ee9.js.map": "/Albiimmobilier/static/js/main.40969ee9.js.map"
+    "main.74c9f4b2.js.map": "/Albiimmobilier/static/js/main.74c9f4b2.js.map"
   },
   "entrypoints": [
     "static/css/main.7eb41528.css",
-    "static/js/main.40969ee9.js"
+    "static/js/main.74c9f4b2.js"
   ]
 }
