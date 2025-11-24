@@ -13,31 +13,22 @@ function DivPageAnnonceCreation({datas}) {
   const [message, setMessage] = useState("");
   const [valid,setValid] = useState(false)
 
-  const [type, setType] = useState("");
+  const [type, setType] = useState(row.type);
   const tabLibType = ["Maison", "Appartement"];
-  const [chauffage, setChauffage] = useState("");
+  const [chauffage, setChauffage] = useState(row.chauffage);
   const tabLibChauffage = ["Electrique", "Gaz","Fioul","Pompe à chaleur","Bois"];
-  const [pieces, setPieces] = useState("");
-  const [superficie, setSuperficie] = useState("");
-  const [dpe, setDpe] = useState("");
+  const [pieces, setPieces] = useState(row.pieces);
+  const [superficie, setSuperficie] = useState(row.superficie);
+  const [dpe, setDpe] = useState(row.dpe);
   const tabLibDpe = ["En cours", "A","B","C","D","E","F","G"];
-  const [ges, setGes] = useState("");
+  const [ges, setGes] = useState(row.ges);
   const tabLibGes = ["En cours", "A","B","C","D","E","F","G"];
-  const [infos, setInfos] = useState("");
-  const [prix, setPrix] = useState("");
+  const [infos, setInfos] = useState(row.infos);
+  const [prix, setPrix] = useState(row.prix);
+  const [chValid,setChValid] = useState(row.valide);
+  const tabLibValid = ["En cours", "Oui"];
 
-/*
-  if(mode === "update") {
-    setType(row.type);
-    setChauffage(row.chauffage);
-    setPieces(row.pieces);
-    setSuperficie(row.superficie);
-    setDpe(row.dpe);
-    setGes(row.ges);
-    setInfos(row.infos);
-    setPrix(row.prix);
-  }
- */
+
   // if change
   const handleTypeChange = (event) => setType(event.target.value);
   const handleChauffageChange = (event) => setChauffage(event.target.value);
@@ -47,16 +38,13 @@ function DivPageAnnonceCreation({datas}) {
   const handleGesChange = (event) => setGes(event.target.value);
   const handleInfosChange = (event) => setInfos(event.target.value);
   const handlePrixChange = (event) => setPrix(event.target.value);
+  const handleValidChange = (event) => setChValid(event.target.value);
 
-  var libValide = "En cours"
-  if(pseudo === "admin") {
-    libValide = "Oui"
-  } 
 
   // 🔹 Fonction appelée quand on clique sur "Valider"
     const handleSubmit = async () => {
-      alert(mode);
-      if (!type  || !chauffage || !pieces || !superficie || !dpe || !ges || !infos || !prix) {
+     alert("handleSubmit : " + mode  + " = " + type + " , " + chauffage + " , " + pieces + " , " + superficie + " , " + dpe + " , " + ges + " , " + infos + " , " + prix + " , " + chValid);
+      if (!type  || !chauffage || !pieces || !superficie || !dpe || !ges || !infos || !prix || !chValid) {
         alert("Merci de remplir tous les champs !");
         return;
       }
@@ -67,15 +55,14 @@ function DivPageAnnonceCreation({datas}) {
           // 👉 Insère dans la table "Annonce"
           const { data, error } = await supabase
             .from("Annonce")
-            .insert([{type:type,chauffage:chauffage,pieces: pieces,superficie: superficie, prix:prix,infos:infos,dpe: dpe,ges:ges,pseudo:pseudo,valide:libValide }]);
+            .insert([{type:type,chauffage:chauffage,pieces: pieces,superficie: superficie, prix:prix,infos:infos,dpe: dpe,ges:ges,pseudo:pseudo,valide:"En cours" }]);
         } else {
           if(mode === "update") {       
-            alert("update");
 
             // 👉 update dans la table "Annonce"
             const { data, error } = await supabase
               .from("Annonce")
-              .update([{type:type,chauffage:chauffage,pieces: pieces,superficie: superficie, prix:prix,infos:infos,dpe: dpe,ges:ges,pseudo:pseudo,valide:libValide }])
+              .update([{type:type,chauffage:chauffage,pieces: pieces,superficie: superficie, prix:prix,infos:infos,dpe: dpe,ges:ges,pseudo:pseudo,valide:chValid }])
               .eq("id", row.id)
             }
         }
@@ -137,14 +124,14 @@ function DivPageAnnonceCreation({datas}) {
                       <tr style={styles.trTableRecherche}>
                         <td>Pièces</td>
                         <td>
-                          <input type='text' size={5} value={row.pieces} onChange={handlePiecesChange}></input>
+                          <input type='text' size={5} defaultValue={row.pieces} onChange={handlePiecesChange}></input>
                         </td>
                       </tr>
 
                       <tr style={styles.trTableRecherche}>
                         <td style={{paddingRight:"6px"}}>Superficie</td>
                         <td>
-                          <input type='text' size={5} value={row.superficie} onChange={handleSuperficieChange}></input> m2
+                          <input type='text' size={5} defaultValue={row.superficie} onChange={handleSuperficieChange}></input> m2
                         </td>
                       </tr>
 
@@ -179,9 +166,25 @@ function DivPageAnnonceCreation({datas}) {
                       <tr style={styles.trTableRecherche}>
                         <td>Prix</td>
                         <td>
-                          <input type='text' size={5} value={row.prix} onChange={handlePrixChange}></input> €
+                          <input type='text' size={5} defaultValue={row.prix} onChange={handlePrixChange}></input> €
                         </td>
                       </tr>
+                      
+                      <br></br>          
+
+                      {pseudo === "admin" && (
+                        <tr style={styles.trTableRecherche}>
+                          <td>Valide</td>
+                          <td>
+                            <select defaultValue= {row.valide} onChange={handleValidChange}>
+                              <option value=""></option>
+                              {tabLibValid.map((libValide, index) => (
+                                <option key={index} value={libValide}>{libValide}</option>
+                              ))}
+                            </select>
+                          </td>
+                        </tr>
+                      )}   
 
                     </table>
                   </td>
@@ -199,8 +202,9 @@ function DivPageAnnonceCreation({datas}) {
                   </td>
 
                   <td style={{verticalAlign:"top",paddingLeft:10}}>
-                      <button style={styles.btnOk}
-                      onClick={handleSubmit} >Valider</button>
+                    <button style={styles.btnOk} onClick={handleSubmit}>
+                      {mode !== "update" ? "Créer" : "Modifier"}
+                    </button>
                   </td>                  
 
                 </tr>
